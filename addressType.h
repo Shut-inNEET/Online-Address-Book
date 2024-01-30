@@ -15,48 +15,22 @@ public:
 	// Sets the address string
 	// Precondition: adr is a valid address string
 	// Postcondition: address field set to adr
-	void setAddress(string adr)
-	{
-		address = adr;
-	}
+	void setAddress(string);
 
 	// Sets the city name
 	// Precondition: ct is a valid city name string 
 	// Postcondition: city field set to ct
-	void setCity(string ct)
-	{
-		city = ct;
-	}
+	void setCity(string);
 
 	// Sets the state abbreviation 
 	// Precondition: st is a valid 2 letter state abbreviation
 	// Postcondition: state field set to st
-	void setState(string st)
-	{
-		if (st.length() == 2)
-		{
-			state = st;
-		}
-		else
-		{
-			state = "XX";
-		}
-	}
+	void setState(string st);
 
 	// Sets the zipcode 
 	// Precondition: zip is an integer between 11111-99999
 	// Postcondition: zipcode field set to zip
-	void setZipcode(int zip)
-	{
-		if (zip > 11111 && zip < 99999)
-		{
-			zipcode = zip;
-		}
-		else
-		{
-			zipcode = 10000;
-		}
-	}
+	void setZipcode(int);
 
 	// Returns address string
 	// Postcondition: Returns value of address field
@@ -88,28 +62,11 @@ public:
 
 	// Prints address fields  
 	// Postcondition: Prints address, city, state, zipcode
-	void print() const
-	{
-		cout << address << endl;
-		cout << city << " " << state << ", " << zipcode << endl;
-	}
+	void print() const;
 
 	// Default constructor
-	addressType()
-	{
-		address = "";
-		city = "";
-		state = "XX";
-		zipcode = 10000;
-	}
+	addressType();
 
 	// Constructor with parameters
-	addressType(string adr, string ct, string st, int zip)
-	{
-		address = adr;
-		city = ct;
-
-		setState(st);
-		setZipcode(zip);
-	}
+	addressType(string, string, string, int);
 };

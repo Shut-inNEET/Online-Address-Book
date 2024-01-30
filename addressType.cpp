@@ -1,37 +1,59 @@
-// addressType-Class branch.cpp : This file contains the 'main' function. Program execution begins and ends there.
-
-#include <iostream>
 #include "addressType.h"
 
-using namespace std;
-
-int main()
+// Definitions
+void addressType::setAddress(string adr)
 {
-	cout << "Testing default constructor ... " << endl;
-	addressType defAddress;
-	defAddress.print();
-	cout << endl;
+	address = adr;
+}
 
-	cout << "Testing constructor with parameters ... " << endl;
-	addressType address("123 South Street", "Newport News", "VA", 23664);
-	address.print();
-	cout << endl;
+void addressType::setCity(string ct)
+{
+	city = ct;
+}
 
-	cout << "Testing invalid state (Virginia)... " << endl;
-	address.setState("Virginia");
-	address.print();
-	cout << endl;
+void addressType::setState(string st)
+{
+	if (st.length() == 2)
+	{
+		state = st;
+	}
+	else
+	{
+		state = "XX";
+	}
+}
 
-	cout << "Testing invalid zipcode (55555555)..." << endl;
-	address.setZipcode(55555555);
-	address.print();
-	cout << endl;
+void addressType::setZipcode(int zip)
+{
+	if (zip > 11111 && zip < 99999)
+	{
+		zipcode = zip;
+	}
+	else
+	{
+		zipcode = 10000;
+	}
+}
 
-	cout << "Testing valid address ..." << endl;
-	address.setAddress("44 East Main Street");
-	address.setCity("Hampton");
-	address.setState("VA");
-	address.setZipcode(23669);
-	address.print();
-	cout << endl;
+void addressType::print() const
+{
+	cout << address << endl;
+	cout << city << " " << state << ", " << zipcode << endl;
+}
+
+addressType::addressType()
+{
+	address = "";
+	city = "";
+	state = "XX";
+	zipcode = 10000;
+}
+
+addressType::addressType(string adr, string ct, string st, int zip)
+{
+	address = adr;
+	city = ct;
+
+	setState(st);
+	setZipcode(zip);
 }
