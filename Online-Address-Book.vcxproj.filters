@@ -15,8 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Online-Address-Book.cpp">
+    <ClCompile Include="extPersonType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="personType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dateType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="addressType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="extPersonType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="personType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dateType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="addressType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
