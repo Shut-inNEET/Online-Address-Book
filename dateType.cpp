@@ -12,7 +12,7 @@ void dateType::setDate(int Month, int Day, int Year)
 {
     daysInMonths[1] = isleapYear() ? 29 : 28; // adjust February days based on leap year
 
-    if (Day <= daysInMonths[Month - 1] && Year >= 1900)
+    if (Month >= 1 && Month <= 12 && Day <= daysInMonths[Month - 1] && Year >= 1900)
     {
         currentMonth = Month;
         currentDay = Day;
