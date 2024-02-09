@@ -1,15 +1,16 @@
 #include "extPersonType.h"
 #include <fstream>
+#include <string>
 
 class addressBookType
 {
 private:
 	extPersonType addressList[500];
-	int length;
-	int maxLength;
+	int length = 0;
+	int maxLength = 1000;
 
 public:
-	void initEntry(string);
+	void initEntry();
 
 	void addEntry(extPersonType);
 
