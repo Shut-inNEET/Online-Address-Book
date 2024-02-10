@@ -7,7 +7,7 @@ class addressBookType
 private:
 	extPersonType addressList[500];
 	int length = 0;
-	int maxLength = 1000;
+	int maxLength = 500;
 
 public:
 	// Adds entries to addressList from the file
