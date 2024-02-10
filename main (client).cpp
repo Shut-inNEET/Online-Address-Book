@@ -2,6 +2,8 @@
 
 #include "addressBookType.h"
 
+// Displays a menu interface for user to interact with
+// Postcondition: returns the user’s selection
 int showMenu();
 
 int main()
