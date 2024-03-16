@@ -12,7 +12,6 @@ int main()
 	int birthMonth;
 	string relation;
 	addressBookType list;
-	extPersonType newEntry;
 	
 	list.initEntry();
 	int choice = showMenu();
@@ -40,29 +39,22 @@ int main()
 			list.findRelations(relation);
 			break;
 		case 4:
+			cout << "Sorting entries...\n" << endl;
+			list.sortEntries();
+			break;
+		case 5:
 			cout << "Printing entries...\n" << endl;
 			list.print();
 			break;
-		case 5:
-			list.getNewEntryInfo(newEntry);
-			break;
 		case 6:
-			list.removeEntry(newEntry);
-			break;
-		case 7:
 			break;
 		default:
 			cout << "Invalid choice\n" << endl;
 			break;
 		}
-		
-		if (choice != 7)
-		{
-			choice = showMenu();
-		}			
-	} while (choice != 7);
-	
-	list.saveAddressBook();
+		choice = showMenu(); 
+	} while (choice != 6);
+
 	return 0;
 };
 
@@ -71,14 +63,13 @@ int showMenu()
 	int choice; 
 
 	cout << "MAIN MENU" << endl;
-	cout << "Enter options 1-7" << endl;
+	cout << "Enter options 1-6" << endl;
 	cout << "1 - Find entries containing last name" << endl;
 	cout << "2 - Find entries by birth month" << endl;
 	cout << "3 - Find entries by relationship" << endl;
-	cout << "4 - Print entire address book" << endl;
-	cout << "5 - Add entry to address book" << endl;
-	cout << "6 - Remove entry from address book" << endl;
-	cout << "7 - Save and quit" << endl;
+	cout << "4 - Sort entries" << endl;
+	cout << "5 - Print entire address book" << endl;
+	cout << "6 - Quit" << endl;
 	cin >> choice;
 	cout << endl;
 	
