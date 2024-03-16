@@ -22,14 +22,14 @@ public:
 
 	// Retrieves first name.
 	// Postcondition: Returns the current value of the firstName attribute.
-	string getFirstName()
+	string getFirstName() const
 	{
 		return firstName;
 	}
 
 	// Retrieves last name.
 	// Postcondition: Returns the current value of the lastName attribute.
-	string getLastName()
+	string getLastName() const
 	{
 		return lastName;
 	}

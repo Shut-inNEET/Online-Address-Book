@@ -27,90 +27,169 @@ void addressBookType::initEntry()
 		extPersonType newEntry(firstName, lastName, month, day, year, addr, cty, st, zip, phone, relation);
 		addEntry(newEntry);
 	}
+	inFile.close();
 }
 
 void addressBookType::addEntry(extPersonType newEntry)
 {	
-	if (length <= maxLength)
-	{
-		addressList[length] = newEntry; 
-		length++;
-	}
-	else
-	{
-		cout << "Address book full" << endl;
-	}
+	insert(newEntry);
 }
 
 void addressBookType::print()
 {
-	for (int i = 0; i < length; i++)
+	nodeType<extPersonType>* current = first;
+
+	while (current != nullptr) 
 	{
-		addressList[i].print();
+		current->info.print();
+		current = current->link;
 		cout << endl;
 	}
 }
 
 void addressBookType::findPerson(string search)
 {
-	for (int i = 0; i < length; i++)
-	{	
-		if (addressList[i].getLastName() == search)
+	nodeType<extPersonType>* current = first;
+
+	while (current != nullptr) 
+	{
+		if (current->info.getLastName() == search) 
 		{
-			addressList[i].print();
-			cout << endl;
+			current->info.print();
+			cout << endl; 
 		}
+		current = current->link;
 	}
 }
 
 void addressBookType::findBirthday(int search)
 {
-	for (int i = 0; i < length; i++)
+	nodeType<extPersonType>* current = first;
+
+	while (current != nullptr) 
 	{
-		if (addressList[i].getBirthMonth() == search)
+		if (current->info.getBirthMonth() == search) 
 		{
-			addressList[i].print();
+			current->info.print();
 			cout << endl;
 		}
+		current = current->link;
 	}
 }
 
 void addressBookType::findRelations(string search)
 {
-	for (int i = 0; i < length; i++)
+	nodeType<extPersonType>* current = first;
+
+	while (current != nullptr)
 	{
-		if (addressList[i].getRelationship() == search)
+		if (current->info.getRelationship() == search)
 		{
-			addressList[i].print();
+			current->info.print();
 			cout << endl;
 		}
+		current = current->link;
 	}
 }
 
-void addressBookType::sortEntries()
+void addressBookType::getNewEntryInfo(extPersonType& newEntry)
 {
-	int current = 1;
-	extPersonType temp;
+	string firstName, lastName;
+	int month, day, year;
+	string adr, cty, st;
+	int zip;
+	addressType address;
+	string phone, relation;
 
-	while (current < length)
+	cout << "Enter first name: ";
+	cin >> firstName;
+	newEntry.setFirstName(firstName);
+
+	cout << "Enter last name: ";
+	cin >> lastName;
+	newEntry.setLastName(lastName);
+
+	cout << "Enter birth month: ";
+	cin >> month;
+	cout << "Enter birth day: ";
+	cin >> day;
+	cout << "Enter birth year: ";
+	cin >> year;
+	newEntry.setBirthdate(month, day, year);
+	
+	cout << "Enter address: ";
+	cin.clear();
+	cin.ignore(); 
+	getline(cin, adr);
+	cout << "Enter city: ";
+	cin.clear();
+	getline(cin, cty);
+	cout << "Enter state abbreviation: ";
+	cin >> st;
+	cout << "Enter zipcode: ";
+	cin >> zip;
+	newEntry.setFullAddress(adr, cty, st, zip);
+
+	cout << "Enter phone number: ";
+	cin >> phone;
+	newEntry.setPhoneNumber(phone);
+
+	cout << "Enter relationship: ";
+	cin >> relation;
+	newEntry.setRelationship(relation);
+
+	addEntry(newEntry);
+	cout << "Entry added!\n" << endl;	
+}
+
+void addressBookType::removeEntry(extPersonType deleteEntry)
+{
+	string firstName, lastName;
+
+	cout << "Enter the first and last name of the entry you would like to delete: ";
+	cin >> firstName >> lastName;
+	deleteEntry.setFirstName(firstName);
+	deleteEntry.setLastName(lastName);
+
+	bool found = false;
+	nodeType<extPersonType>* current = first;
+
+	while (current != nullptr) 
 	{
-		int index = current; 
-		bool placeFound = false;
-		
-		while (index > 0 && !placeFound)
+		if (current->info == deleteEntry) 
 		{
-			if (addressList[index].getLastName() < addressList[index - 1].getLastName())
-			{
-				temp = addressList[index];
-				addressList[index] = addressList[index - 1];
-				addressList[index - 1] = temp;
-				index = index - 1;
-			}
-			else
-			{
-				placeFound = true;
-			}
+			found = true;
+			deleteNode(current->info);  
+			cout << "Removed entry for " << firstName << " " << lastName << "\n" << endl;
+			break;
 		}
-		current++;
+		current = current->link;
 	}
+
+	if (!found) 
+	{
+		cout << "Error - could not find entry for " << firstName << " " << lastName << "\n" << endl;
+	}
+}
+
+void addressBookType::saveAddressBook()
+{
+	ofstream outFile;
+	nodeType<extPersonType>* current = first;
+
+	outFile.open("AddressBookData.txt");
+	while (current != nullptr)
+	{
+		outFile << current->info.getFirstName() << " " << current->info.getLastName() << endl;
+		outFile << current->info.getBirthMonth() << " " << current->info.getBirthDay() << " " << current->info.getBirthYear() << endl;
+		outFile << current->info.getAddress() << endl; 
+		outFile << current->info.getCity() << endl; 
+		outFile << current->info.getState() << endl; 
+		outFile << current->info.getZipcode() << endl; 
+		outFile << current->info.getPhoneNumber() << endl; 
+		outFile << current->info.getRelationship() << endl;
+		current = current->link;
+		cout << endl;
+	}
+	outFile.close();
 }

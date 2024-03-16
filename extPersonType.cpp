@@ -31,3 +31,37 @@ extPersonType::extPersonType(string first, string last, int day, int month, int 
 	phoneNumber = phone;
 	relationship = status;
 }
+
+bool extPersonType::operator==(const extPersonType& rhs) const
+{
+	string lhsKey = this->getLastName() + " " + this->getFirstName();
+	string rhsKey = rhs.getLastName() + " " + rhs.getFirstName();
+
+	return lhsKey == rhsKey;
+}
+
+bool extPersonType::operator!=(const extPersonType& rhs) const
+{
+	return !(*this == rhs);
+}
+
+bool extPersonType::operator>=(const extPersonType& rhs) const
+{
+	string lhsKey = this->getLastName() + " " + this->getFirstName();
+	string rhsKey = rhs.getLastName() + " " + rhs.getFirstName();
+
+	return lhsKey >= rhsKey;
+}
+
+void extPersonType::setBirthdate(int month, int day, int year) 
+{
+	birthdate.setDate(month, day, year);
+}
+
+void extPersonType::setFullAddress(string adr, string cty, string st, int zip)
+{
+	address.setAddress(adr);
+	address.setCity(cty);
+	address.setState(st);
+	address.setZipcode(zip);
+}
